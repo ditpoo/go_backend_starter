@@ -1,12 +1,14 @@
 package main
 
 import (
-	// "os"
+	"os"
 	"net/http"
 
 	"github.com/gorilla/mux"
 	log "github.com/sirupsen/logrus"
+
 	// "starter/common"
+	"starter/common"
 	"starter/handlers"
 )
 
@@ -17,9 +19,14 @@ func main() {
 	})
 	router := mux.NewRouter()
 
-	// settings := common.GetSettings(os.Getenv("DHANIQ_ENV"))
+	GetSettings := common.GetSettings(os.Getenv("DHANIQ_ENV"))
+
+	auth0Handler := handlers.Auth0{
+		Settings: GetSettings,
+	}
 
 	router.HandleFunc("/health", handlers.HealthHandler).Methods("GET", "OPTIONS")
+	router.HandleFunc("/login", auth0Handler.Login).Methods("POST", "OPTIONS")
 
 	http.Handle("/", router)
 

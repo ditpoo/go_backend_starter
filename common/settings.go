@@ -12,6 +12,7 @@ type Settings struct {
 	DatabasePassword     string
 	Auth0ClientId        string
 	Auth0ClientSecret    string
+	Auth0EndPoint        string
 }
 
 func (s *Settings) GetDBString() string {
@@ -32,6 +33,7 @@ func GetSettings(env string) *Settings {
 			DatabasePassword: os.Getenv("DATABASE_PASSWORD"),
 			Auth0ClientId: os.Getenv("AUTH0_CLIENT_ID"),
 			Auth0ClientSecret: os.Getenv("AUTH0_CLIENT_SECRET"),
+			Auth0EndPoint: os.Getenv("AUTH0_END_POINT"),
 		}
 	case "prod":
 		return &Settings{
@@ -41,6 +43,7 @@ func GetSettings(env string) *Settings {
 			DatabasePassword: os.Getenv("DATABASE_PASSWORD"),
 			Auth0ClientId: os.Getenv("AUTH0_CLIENT_ID"),
 			Auth0ClientSecret: os.Getenv("AUTH0_CLIENT_SECRET"),
+			Auth0EndPoint: os.Getenv("AUTH0_END_POINT"),
 		}
 	}
 }
